@@ -1,7 +1,7 @@
 import './card.css'
 const Card = () => {
   return (
-    <div>Card</div>
+    <div>Test uchun ozgardi</div>
   )
 }
 
