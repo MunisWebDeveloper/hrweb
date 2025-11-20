@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Layout from './components/Layout'
+import User from './components/User'
 const telegram = window.Telegram.WebApp
 function App() {
   useEffect(() =>{
@@ -7,8 +7,7 @@ function App() {
 })
   return (
    <>
-   <h1 className='text-red-700'>Test uchun</h1>
-   {/* <Layout /> */}
+   <User />
    </>
   )
 }
