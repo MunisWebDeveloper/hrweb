@@ -10,9 +10,9 @@ const User = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-    <h1 className="text-white font-bold size-28 w-[100%] text-center pt-5">Anketa to'ldirish</h1>
+    <h1 className="text-white text-2xl font-bold size-20 w-[100%] text-center pt-10">Anketa to'ldirish</h1>
      
-     <LabelComp text={"Ism"}  />
+     <LabelComp text={"Ism"} />
     <InputComp/>
 
     <LabelComp text={"Familiya"} />
