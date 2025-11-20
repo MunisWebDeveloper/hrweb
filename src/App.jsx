@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
-import './App.css'
-import Card from './constants/card/Card'
+import Layout from './components/Layout'
 const telegram = window.Telegram.WebApp
 function App() {
   useEffect(() =>{
-    telegram.ready()
-  })
+ telegram.ready()
+})
   return (
-    <>
-    <Card />
-    </>
+   <>
+   <h1 className='text-red-700'>Test uchun</h1>
+   {/* <Layout /> */}
+   </>
   )
 }
 
