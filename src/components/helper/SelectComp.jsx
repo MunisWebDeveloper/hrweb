@@ -4,7 +4,7 @@ const SelectComp = () => {
   return (
     <>
   <div class="relative">
-    <select class="w-full px-4 py-3 bg-white border border-gray-600 rounded-lg text-gray-600 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 appearance-none pr-10">
+    <select class="w-full mt-3 px-4 py-3 bg-white border border-gray-600 rounded-lg text-gray-600 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 appearance-none pr-10">
       <option value="E">Erkak</option>
       <option value="A">Ayol</option>
     </select>

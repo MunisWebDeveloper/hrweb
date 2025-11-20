@@ -4,7 +4,7 @@ const LabelComp = ({text}) => {
   return (
     <label 
         for="name"
-        className="text-white pb-10" 
+        className="mt-2 text-white pb-10" 
     >
     {text}
     </label>
