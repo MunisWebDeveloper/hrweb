@@ -126,7 +126,7 @@ const User = () => {
 Roziman * <a href="" className="text-red-500">(Rozilik shartlari bilan tanishish)</a></p>
     </div>
     <div className="w-full flex justify-center">
-      <button className="text-white bg-sky-600 min-h-20 min-w-60 rounded">Anketani yuborish</button>
+      <button className="text-white bg-sky-600 min-h-14 w-full rounded">Anketani yuborish</button>
     </div>
 </div>
     </>
