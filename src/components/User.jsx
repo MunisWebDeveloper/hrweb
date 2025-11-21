@@ -3,7 +3,7 @@ import DateComp from "./helper/DateComp"
 import InputComp from "./helper/InputComp"
 import LabelComp from "./helper/LabelComp"
 import SelectComp from "./helper/SelectComp"
-import ChildrenTable from "./helper/TableComp"
+import TableComp from "./helper/TableComp"
 import TableComp2 from "./helper/TableComp2"
 import TableComp3 from "./helper/TableComp3"
 import UploadBox from "./helper/UploadComp"
@@ -14,11 +14,33 @@ const User = () => {
   const [familiya, setFamiliya] = useState("")
   const [sharif, setSharif] = useState("")
   const [tsana, setTsana] = useState("")
-  const ConsoleUser = () =>{
+  const [jins, setJins] = useState("")
+  const [oilaviyHolat, setOilaviyHolat] = useState("")
+  const [farzand, setFarzand] = useState("")
+  const [ftsana, setFtsana] = useState("")
+
+  const jinsOptions = [
+    { value: "erkak", label: "Erkak" },
+    { value: "ayol", label: "Ayol" }
+  ]
+    const oilaviyHolatOptions = [
+    { value: "uylangan", label: "Uylangan" },
+    { value: "bo'ydoq", label: "Bo'ydoq" },
+    { value: "ajrashgan", label: "Ajrashgan" }
+  ]
+   const farzandOptions = [
+    { value: "O'g'il", label: "O'g'il" },
+    { value: "Qiz", label: "Qiz" },
+  ]
+    const ConsoleUser = () =>{
     console.log(fio);
     console.log(familiya);
     console.log(sharif);
     console.log(tsana);
+    console.log(jins);
+    console.log(oilaviyHolat);
+    console.log(farzand);
+    console.log(ftsana);
     
   }
   return (
@@ -45,20 +67,39 @@ const User = () => {
       </div>
       <div>        
         <LabelComp text={"Jinsingiz"} />
-    <SelectComp/>
+    <SelectComp  
+      options={jinsOptions}
+        value={jins}
+        onChange={setJins}
+        placeholder="Jinsingizni tanlang" 
+  />
       </div>
     </div>
         <LabelComp text={"Oilaviy holatingiz"} />
-    <SelectComp/>
+    <SelectComp 
+        options={oilaviyHolatOptions}
+        value={oilaviyHolat}
+        onChange={setOilaviyHolat} 
+        placeholder="Oilaviy holatingiz"
+    />
+
     <div className="flex justify-between">
         <LabelComp text={"Farzandlari"} />
+        
       <div className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5">
   <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"/>
   </svg>
 </div>
     </div>
-<ChildrenTable/>
+<TableComp 
+  options={farzandOptions}
+  value={farzand}
+  onChange={setFarzand} 
+  setFtsana={setFtsana}
+  ftsana={ftsana}
+  placeholder="Farzandlari"
+/>
 <div className="flex justify-between items-center">
         <LabelComp text={"Oilaviy tarkibingiz"} />
       <div className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5">
