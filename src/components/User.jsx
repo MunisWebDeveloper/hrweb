@@ -1,3 +1,4 @@
+import { useState } from "react"
 import DateComp from "./helper/DateComp"
 import InputComp from "./helper/InputComp"
 import LabelComp from "./helper/LabelComp"
@@ -9,10 +10,20 @@ import UploadBox from "./helper/UploadComp"
 import UploadingComp2 from "./helper/UploadingComp2"
 
 const User = () => {
+  const [fio, setFio] = useState("")
+  const [familiya, setFamiliya] = useState("")
+  const [sharif, setSharif] = useState("")
+  const [tsana, setTsana] = useState("")
+  const ConsoleUser = () =>{
+    console.log(fio);
+    console.log(familiya);
+    console.log(sharif);
+    console.log(tsana);
+    
+  }
   return (
     <>
       <div className="container mx-auto h-[100%] p-5 bg-black"  style={{
-        // backgroundImage: "url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -20,17 +31,17 @@ const User = () => {
     <h1 className="text-white text-2xl font-bold size-20 w-[100%] text-center pt-10">Anketa to'ldirish</h1>
      
      <LabelComp text={"Ism"} />
-    <InputComp/>
-
+    <InputComp value={fio} setChange={setFio} placeholder="Ismingizni kiriting"/>
+    
     <LabelComp text={"Familiya"} />
-    <InputComp/>
+    <InputComp value={familiya} setChange={setFamiliya} placeholder="Familiyangizni kiriting"/>
 
     <LabelComp text={"Otasining ismi"} />
-    <InputComp/>
+    <InputComp value={sharif} setChange={setSharif} placeholder="Sharifingizni kiriting"/>
     <div className="flex justify-between">
       <div >        
         <LabelComp text={"Tug'ilgan sana"} />
-        <DateComp />
+        <DateComp value={tsana} setChange={setTsana} />
       </div>
       <div>        
         <LabelComp text={"Jinsingiz"} />
@@ -66,7 +77,8 @@ const User = () => {
 <LabelComp text={"Qaysi tillarni bilasiz?"} />
 <TableComp2/>
  <LabelComp text={"Bo'y va vazningiz (sm/kg)"} />
-  <InputComp/>
+  {/* <InputComp/> */}
+  <InputComp />
   <LabelComp text={"Viloyat (Haqiqiy turar joy) *"} />
 <SelectComp className="mb-3" />
   <LabelComp text={"Shaxar/Tuman (Haqiqiy turar joy)"} />
@@ -126,7 +138,7 @@ const User = () => {
 Roziman * <a href="" className="text-red-500">(Rozilik shartlari bilan tanishish)</a></p>
     </div>
     <div className="w-full flex justify-center">
-      <button className="text-white bg-sky-600 min-h-14 w-full rounded">Anketani yuborish</button>
+      <button onClick={ConsoleUser} className="text-white bg-sky-600 min-h-14 w-full rounded">Anketani yuborish</button>
     </div>
 </div>
     </>

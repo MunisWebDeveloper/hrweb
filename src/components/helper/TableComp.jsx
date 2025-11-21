@@ -2,8 +2,6 @@ import DateComp from "./DateComp";
 import SelectComp from "./SelectComp";
 
 function ChildrenTable() {
-
-
   return (
     <>
       <div className="overflow-x-auto">
@@ -50,6 +48,7 @@ function ChildrenTable() {
                 </button>
               </td>
             </tr>
+            
             <tr className="hover:bg-gray-50 transition duration-150">
               <td className="px-3 py-2 whitespace-nowrap">
                 <div className="flex items-center">
@@ -77,6 +76,7 @@ function ChildrenTable() {
                 </button>
               </td>
             </tr>
+            
             <tr className="hover:bg-gray-50 transition duration-150">
               <td className="px-3 py-2 whitespace-nowrap">
                 <div className="flex items-center">
@@ -104,6 +104,7 @@ function ChildrenTable() {
                 </button>
               </td>
             </tr>
+            
             <tr className="hover:bg-gray-50 transition duration-150">
               <td className="px-3 py-2 whitespace-nowrap">
                 <div className="flex items-center">
@@ -130,7 +131,9 @@ function ChildrenTable() {
                   </svg>
                 </button>
               </td>
-            </tr><tr className="hover:bg-gray-50 transition duration-150">
+            </tr>
+            
+            <tr className="hover:bg-gray-50 transition duration-150">
               <td className="px-3 py-2 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="ml-3 text-left">

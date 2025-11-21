@@ -3,10 +3,10 @@ export default function UploadingComp2() {
 
   return (
     <div className="flex items-center justify-center bg-gray-900 p-6">
-      <div
+      {/* <div
         aria-hidden
         className="absolute inset-0 bg-center bg-repeat opacity-30"
-      />
+      /> */}
 
       <main className="relative z-10 w-full max-w-md">
         <label className="block text-sm font-semibold text-white mb-3">

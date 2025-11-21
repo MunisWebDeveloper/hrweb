@@ -3,8 +3,6 @@ import InputComp from "./InputComp";
 import SelectComp from "./SelectComp";
 
 function TableComp2() {
-
-
   return (
     <>
       <div className="overflow-x-auto">
@@ -14,17 +12,15 @@ function TableComp2() {
               <th className="px-3 py-2 text-left text-xs text-gray-600">
                 Farzandi
               </th>
-              <div className="flex flex-col">
-               
+              
+              {/* 1-USUL: Alohida th lar */}
               <th className="px-3 py-2 text-left text-xs text-gray-600">
                 Tug'ilgan sana
               </th>
-              <hr/>
               <th className="px-3 py-2 text-left text-xs text-gray-600">
                 Izox
               </th>
-
-              </div>
+              
               <th className="px-3 py-2 text-left text-xs text-gray-600">
                 Amallar
               </th>
@@ -32,7 +28,6 @@ function TableComp2() {
           </thead>
           
           <tbody className="bg-white divide-y divide-gray-200">
-           
             <tr className="hover:bg-gray-50 transition duration-150">
               <td className="px-3 py-2 whitespace-nowrap">
                 <div className="flex items-center">
@@ -44,9 +39,15 @@ function TableComp2() {
                 </div>
               </td>
               
+              {/* Tug'ilgan sana va Izox uchun alohida td lar */}
               <td className="px-3 py-2 whitespace-nowrap text-left">
-                <div className="flex flex-col text-xs text-gray-900 gap-2">
+                <div className="text-xs text-gray-900">
                   <DateComp />
+                </div>
+              </td>
+              
+              <td className="px-3 py-2 whitespace-nowrap text-left">
+                <div className="text-xs text-gray-900">
                   <InputComp />
                 </div>
               </td>
@@ -61,7 +62,6 @@ function TableComp2() {
                 </button>
               </td>
             </tr>
-          
           </tbody>
         </table>
       </div>

@@ -4,11 +4,11 @@ export default function UploadBox() {
   return (
     <div className="flex items-center justify-center bg-gray-900 p-6">
       {/* Background pattern */}
-      <div
+      {/* <div
         aria-hidden
         className="absolute inset-0 bg-center bg-repeat opacity-30"
         // style={{ backgroundImage: `url('${backgroundImageUrl}')` }}
-      />
+      /> */}
 
       <main className="relative z-10 w-full max-w-md">
         <label className="block text-sm font-semibold text-white mb-3">
@@ -58,16 +58,7 @@ export default function UploadBox() {
           </div>
 
           <span className="pointer-events-none absolute inset-0 rounded-lg ring-2 ring-transparent group-focus-within:ring-blue-300" />
-        </label>
-
-        {/* Preview va tugmalar */}
-          {/* <div className="mt-4 rounded-md overflow-hidden border border-gray-200 bg-white"> */}
-            {/* <img  alt="preview" className="w-full h-auto object-cover" /> */}
-            {/* <div className="flex gap-2 p-2 justify-end bg-gray-50">
-              
-            </div> */}
-          {/* </div> */}
-        
+        </label>        
       </main>
     </div>
   );

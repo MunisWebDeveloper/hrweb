@@ -3,38 +3,31 @@ import InputComp from "./InputComp";
 import SelectComp from "./SelectComp";
 
 function TableComp3() {
-
-
   return (
     <>
       <div className="mt-3 overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-100">
             <tr>
-                <th>
+              {/* 1-ustun: O'qish yillari */}
+              <th className="px-3 py-2 text-left text-xs text-gray-600">
                 <div className="flex flex-col">
-               
-              <th className="px-3 py-2 text-left text-xs text-gray-600">
-                O'qishga qabul qilingan yil
+                  <span>O'qishga qabul qilingan yil</span>
+                  <hr className="my-1 border-gray-300" />
+                  <span>O'qishni bitirgan yil</span>
+                </div>
               </th>
-              <hr/>
+              
+              {/* 2-ustun: Ta'lim muassasasi */}
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                O'qishni bitirgan yil
+                <div className="flex flex-col">
+                  <span>Ta'lim muassasasi nomi</span>
+                  <hr className="my-1 border-gray-300" />
+                  <span>Mutaxassisligingiz</span>
+                </div>
               </th>
-
-              </div>
-            </th>
-              <div className="flex flex-col">
-               
-              <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Ta'lim muassasasi nomi
-              </th>
-              <hr/>
-              <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Mutaxassisligingiz
-              </th>
-
-              </div>
+              
+              {/* 3-ustun: Amallar */}
               <th className="px-3 py-2 text-left text-xs text-gray-600">
                 O'chirish
               </th>
@@ -42,19 +35,16 @@ function TableComp3() {
           </thead>
           
           <tbody className="bg-white divide-y divide-gray-200">
-           
             <tr className="hover:bg-gray-50 transition duration-150">
+              {/* 1-ustun ma'lumotlari */}
               <td className="px-3 py-2 whitespace-nowrap">
-                <div className="flex items-center">
-                  <div className="ml-3 text-left">
-                    <div className="flex flex-col text-xs font-medium text-gray-900 gap-2">
-                      <DateComp />
-                      <DateComp />                
-                    </div>
-                  </div>
+                <div className="flex flex-col text-xs font-medium text-gray-900 gap-2">
+                  <DateComp />
+                  <DateComp />                
                 </div>
               </td>
               
+              {/* 2-ustun ma'lumotlari */}
               <td className="px-3 py-2 whitespace-nowrap text-left">
                 <div className="flex flex-col text-xs text-gray-900 gap-2">
                   <InputComp />
@@ -62,6 +52,7 @@ function TableComp3() {
                 </div>
               </td>
               
+              {/* 3-ustun: O'chirish tugmasi */}
               <td className="px-3 py-2 whitespace-nowrap">
                 <button 
                   className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs font-medium transition duration-200 flex items-center"
@@ -72,7 +63,6 @@ function TableComp3() {
                 </button>
               </td>
             </tr>
-          
           </tbody>
         </table>
       </div>
