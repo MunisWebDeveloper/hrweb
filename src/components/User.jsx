@@ -28,8 +28,8 @@ const User = () => {
     <LabelComp text={"Otasining ismi"} />
     <InputComp/>
     <div className="flex justify-between">
-      <div>        
-        <LabelComp text={"Otasining ismi"} />
+      <div >        
+        <LabelComp text={"Tug'ilgan sana"} />
         <DateComp />
       </div>
       <div>        
