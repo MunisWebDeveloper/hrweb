@@ -1,8 +1,7 @@
 import DateComp from "./DateComp";
-import InputComp from "./InputComp";
 import SelectComp from "./SelectComp";
 
-function TableComp2({options,value,onChange,oData,setOData}) {
+function TableComp4({options,value,onChange,options1,value1,onChange1,}) {
   return (
     <>
       <div className="overflow-x-auto">
@@ -10,17 +9,11 @@ function TableComp2({options,value,onChange,oData,setOData}) {
           <thead className="bg-gray-100">
             <tr>
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Farzandi
-              </th>
-              
-              {/* 1-USUL: Alohida th lar */}
-              <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Tug'ilgan sana
+                Til
               </th>
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Izox
+                Qay darajada
               </th>
-              
               <th className="px-3 py-2 text-left text-xs text-gray-600">
                 Amallar
               </th>
@@ -39,16 +32,9 @@ function TableComp2({options,value,onChange,oData,setOData}) {
                 </div>
               </td>
               
-              {/* Tug'ilgan sana va Izox uchun alohida td lar */}
               <td className="px-3 py-2 whitespace-nowrap text-left">
                 <div className="text-xs text-gray-900">
-                  <DateComp value={oData} setChange={setOData} />
-                </div>
-              </td>
-              
-              <td className="px-3 py-2 whitespace-nowrap text-left">
-                <div className="text-xs text-gray-900">
-                  <InputComp />
+                    <SelectComp options={options1} value={value1} onChange={onChange1} />                
                 </div>
               </td>
               
@@ -62,6 +48,10 @@ function TableComp2({options,value,onChange,oData,setOData}) {
                 </button>
               </td>
             </tr>
+            
+            
+            
+            
           </tbody>
         </table>
       </div>
@@ -69,4 +59,4 @@ function TableComp2({options,value,onChange,oData,setOData}) {
   );
 }
 
-export default TableComp2;
+export default TableComp4;

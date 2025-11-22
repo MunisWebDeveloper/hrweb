@@ -2,7 +2,7 @@ import DateComp from "./DateComp";
 import InputComp from "./InputComp";
 import SelectComp from "./SelectComp";
 
-function TableComp3() {
+function TableComp3({oqishqabul,onChange,onChange2,oqishtugatgan,oqishnomi,setOoqishnomi,oqishMutaxasisligi,setOqishMutaxasisligi}) {
   return (
     <>
       <div className="mt-3 overflow-x-auto">
@@ -39,16 +39,16 @@ function TableComp3() {
               {/* 1-ustun ma'lumotlari */}
               <td className="px-3 py-2 whitespace-nowrap">
                 <div className="flex flex-col text-xs font-medium text-gray-900 gap-2">
-                  <DateComp />
-                  <DateComp />                
+                  <DateComp tsana={oqishqabul} setChange={onChange} />
+                  <DateComp tsana={oqishtugatgan} setChange={onChange2} />                
                 </div>
               </td>
               
               {/* 2-ustun ma'lumotlari */}
               <td className="px-3 py-2 whitespace-nowrap text-left">
                 <div className="flex flex-col text-xs text-gray-900 gap-2">
-                  <InputComp />
-                  <InputComp />
+                  <InputComp value={oqishnomi} setChange={setOoqishnomi} />
+                  <InputComp value={oqishMutaxasisligi} setChange={setOqishMutaxasisligi} />
                 </div>
               </td>
               

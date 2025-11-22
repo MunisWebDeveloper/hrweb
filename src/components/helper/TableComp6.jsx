@@ -2,56 +2,54 @@ import DateComp from "./DateComp";
 import InputComp from "./InputComp";
 import SelectComp from "./SelectComp";
 
-function TableComp2({options,value,onChange,oData,setOData}) {
+function TableComp6({oqishqabul,onChange,onChange2,oqishtugatgan,oqishnomi,setOoqishnomi,oqishMutaxasisligi,setOqishMutaxasisligi}) {
   return (
     <>
-      <div className="overflow-x-auto">
+      <div className="mt-3 overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Farzandi
-              </th>
-              
-              {/* 1-USUL: Alohida th lar */}
-              <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Tug'ilgan sana
-              </th>
-              <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Izox
+                <div className="flex flex-col">
+                  <span>Ishga qabul qilingan sana</span>
+                  <hr className="my-1 border-gray-300" />
+                  <span>Ishdan bo'shagan sana</span>
+                </div>
               </th>
               
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                Amallar
+                <div className="flex flex-col">
+                  <span>Ish joyi nomi</span>
+                  <hr className="my-1 border-gray-300" />
+                  <span>Lavozimingiz</span>
+                </div>
+              </th>
+              
+              <th className="px-3 py-2 text-left text-xs text-gray-600">
+                O'chirish
               </th>
             </tr>
           </thead>
           
           <tbody className="bg-white divide-y divide-gray-200">
             <tr className="hover:bg-gray-50 transition duration-150">
+              {/* 1-ustun ma'lumotlari */}
               <td className="px-3 py-2 whitespace-nowrap">
-                <div className="flex items-center">
-                  <div className="ml-3 text-left">
-                    <div className="text-xs font-medium text-gray-900">
-                      <SelectComp options={options} value={value} onChange={onChange} />                
-                    </div>
-                  </div>
+                <div className="flex flex-col text-xs font-medium text-gray-900 gap-2">
+                  <DateComp tsana={oqishqabul} setChange={onChange} />
+                  <DateComp tsana={oqishtugatgan} setChange={onChange2} />                
                 </div>
               </td>
               
-              {/* Tug'ilgan sana va Izox uchun alohida td lar */}
+              {/* 2-ustun ma'lumotlari */}
               <td className="px-3 py-2 whitespace-nowrap text-left">
-                <div className="text-xs text-gray-900">
-                  <DateComp value={oData} setChange={setOData} />
+                <div className="flex flex-col text-xs text-gray-900 gap-2">
+                  <InputComp value={oqishnomi} setChange={setOoqishnomi} />
+                  <InputComp value={oqishMutaxasisligi} setChange={setOqishMutaxasisligi} />
                 </div>
               </td>
               
-              <td className="px-3 py-2 whitespace-nowrap text-left">
-                <div className="text-xs text-gray-900">
-                  <InputComp />
-                </div>
-              </td>
-              
+              {/* 3-ustun: O'chirish tugmasi */}
               <td className="px-3 py-2 whitespace-nowrap">
                 <button 
                   className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs font-medium transition duration-200 flex items-center"
@@ -69,4 +67,4 @@ function TableComp2({options,value,onChange,oData,setOData}) {
   );
 }
 
-export default TableComp2;
+export default TableComp6;
