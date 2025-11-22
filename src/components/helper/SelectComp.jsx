@@ -1,4 +1,4 @@
- const SelectComp = ({ options, value,onChange, placeholder }) => {
+ const SelectComp = ({ options, value,onChange, placeholder = "Tanlang..." }) => {
   // const handleChange = (e) => {
   //   if (onSelectChange) {
   //     onSelectChange(e.target.value)

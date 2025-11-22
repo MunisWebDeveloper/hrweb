@@ -19,8 +19,7 @@ const User = () => {
   const [tsana, setTsana] = useState("")
   const [jins, setJins] = useState("")
   const [oilaviyHolat, setOilaviyHolat] = useState("")
-  const [farzand, setFarzand] = useState("")
-  const [ftsana, setFtsana] = useState("")
+  const [farzand, setFarzand] = useState([])
   const [otarkib,setOtarkib] = useState("")
   const [oData,setOData] = useState("")
   const [malumoti,setMalumoti] = useState("")
@@ -43,7 +42,7 @@ const User = () => {
   const [tanishiBormi,setTanishiBormi] = useState("")
   const [dasturlarniBilishDarajasi,setDasturlarniBilishDarajasi] = useState("")
   const [dasturlarniBilishDarajasiFoyiz,setDasturlarniBilishDarajasiFoyiz] = useState("")
-  const [savolJavoblarIzox,setSavolJavoblarIzox] = useState("")
+  // const [savolJavoblarIzox,setSavolJavoblarIzox] = useState("")
   const [qoshimchaMalumot,setQoshimchaMalumot] = useState("")
   const [ishgaKirganMalumoti,setIshgaKirganMalumoti] = useState("")
   const [ishdanBoshaganMalumot,setIshdanBoshaganMalumot] = useState("")
@@ -61,12 +60,13 @@ const User = () => {
     { value: "erkak", label: "Erkak" },
     { value: "ayol", label: "Ayol" }
   ]
-    const oilaviyHolatOptions = [
+  const oilaviyHolatOptions = [
     { value: "uylangan", label: "Uylangan" },
     { value: "bo'ydoq", label: "Bo'ydoq" },
     { value: "ajrashgan", label: "Ajrashgan" }
   ]
-   const farzandOptions = [
+  const farzandOptions = [
+    { value: "", label: "Tanlang" },
     { value: "O'g'il", label: "O'g'il" },
     { value: "Qiz", label: "Qiz" },
   ]
@@ -95,11 +95,11 @@ const User = () => {
     { value: "Bakalavr", label: "Bakalavr" },
     { value: "Magistr", label: "Magistr" },
   ]
- const oqiyotganMalumotiOptions = [
+  const oqiyotganMalumotiOptions = [
     { value: "Xa", label: "Xa" },
     { value: "Yo'q", label: "Yo'q" }
   ]
-   const tilBilishDarajasiOptions = [
+  const tilBilishDarajasiOptions = [
     { value: "Рус", label: "Рус" },
     { value: "Tojik", label: "Tojik" },
     { value: "Ingliz", label: "Ingliz" },
@@ -109,9 +109,8 @@ const User = () => {
     { value: "Azarbayjon", label: "Azarbayjon" },
     { value: "Nems", label: "Nems" },
     { value: "Boshqa", label: "Boshqa" },
-
   ]
-   const tilBilishDarajasiFoyizOptions = [
+  const tilBilishDarajasiFoyizOptions = [
     { value: "10%", label: "10%" },
     { value: "20%", label: "20%" },
     { value: "30%", label: "30%" },
@@ -129,20 +128,19 @@ const User = () => {
     { value: "Namangan", label: "Namangan" },
     { value: "Toshkent", label: "Toshkent" },
   ]
-   const shaharOptions = [
+  const shaharOptions = [
     { value: "Quvasoy shahar", label: "Quvasoy shahar" },
     { value: "Quva tumani", label: "Quva tumani" },
     { value: "Oltariq", label: "Oltariq" },
     { value: "Marg'ilon", label: "Marg'ilon" },
   ]
- const xoxlaydiganFilialOptions = [
+  const xoxlaydiganFilialOptions = [
     { value: "Farg'ona", label: "Farg'ona" },
     { value: "Andijon", label: "Andijon" },
     { value: "Namangan", label: "Namangan" },
     { value: "Toshkent", label: "Toshkent" },
   ]
-
-   const xoxlaydiganLavozimOptions = [
+  const xoxlaydiganLavozimOptions = [
     { value: "Dastavchik", label: "Dastavchik" },
     { value: "Oshpaz", label: "Oshpaz" },
     { value: "Bogbon", label: "Bogbon" },
@@ -168,7 +166,7 @@ const User = () => {
     { value: "Google Chrome", label: "Google Chrome" },
     { value: "Instagram", label: "Instagram" },
   ]
-    const dasturlarniBilishDarajasiFoyizOptions = [
+  const dasturlarniBilishDarajasiFoyizOptions = [
     { value: "10%", label: "10%" },
     { value: "20%", label: "20%" },
     { value: "30%", label: "30%" },
@@ -180,7 +178,7 @@ const User = () => {
     { value: "90%", label: "90%" },
     { value: "100%", label: "100%" },
   ]
-    const SavolJavobdivlaridiv = [
+  const SavolJavoblar = [
     { value: "Og'ir narsalar ko'tara olasizmi?", label: "Og'ir narsalar ko'tara olasizmi?" },
     { value: "Yuragingizdan shikoyatingiz bormi?", label: "Yuragingizdan shikoyatingiz bormi?" },
     { value: "Og'ir jarroxlik amaliyotini o'taganmisiz?", label: "Og'ir jarroxlik amaliyotini o'taganmisiz?" },
@@ -188,11 +186,11 @@ const User = () => {
     { value: "Bel og'rig'idan shikoyatingiz bormi?", label: "Bel og'rig'idan shikoyatingiz bormi?" },
     { value: "Bir joyda turib yoki o'tirib ishlay olasizmi?", label: "Bir joyda turib yoki o'tirib ishlay olasizmi?" },
   ]
- const SavolJavobdivlaridivOptions = [
+  const SavolJavobOptions = [
     { value: "Xa", label: "Xa" },
     { value: "Yo'q", label: "Yo'q" }
   ]
-const avtomobiliOption = [
+  const avtomobiliOption = [
     { value: "Xa", label: "Xa" },
     { value: "Yo'q", label: "Yo'q" }
   ]
@@ -208,85 +206,126 @@ const avtomobiliOption = [
     { value: "Xa", label: "Xa" },
     { value: "Yo'q", label: "Yo'q" }
   ]
-    const passportTuriOption = [
+  const passportTuriOption = [
     { value: true, label: "ID karta" },
     { value: false, label: "Oddiy" }
   ]
-    const ConsoleUser = () =>{
-    console.log(fio);
-    console.log(familiya);
-    console.log(sharif);
-    console.log(tsana);
-    console.log(jins);
-    console.log(oilaviyHolat);
+
+  const ConsoleUser = () =>{
+    // console.log(fio);
+    // console.log(familiya);
+    // console.log(sharif);
+    // console.log(tsana);
+    // console.log(jins);
+    // console.log(oilaviyHolat);
+    // console.log(farzand);
+    // console.log(ftsana);
+    // console.log(otarkib);
+    // console.log(oData);
+    // console.log(oqishqabul);
+    // console.log(oqishtugatgan);
+    // console.log(oqishnomi);
+    // console.log(oqishMutaxasisligi);
+    // console.log(oqiyotganMalumoti);
     console.log(farzand);
-    console.log(ftsana);
-    console.log(otarkib);
-    console.log(oData);
-    console.log(oqishqabul);
-    console.log(oqishtugatgan);
-    console.log(oqishnomi);
-    console.log(oqishMutaxasisligi);
-    console.log(oqiyotganMalumoti);
     
   }
+
+  // Farzand qo'shish funksiyasi
+  const addFamilyMember = () => {
+    const newMember = {
+      id: Date.now(), 
+      type: "",
+      birthDate: ""
+    };
+    
+    setFarzand(prevFarzand => [...(prevFarzand || []), newMember]);
+  };
+
+  // Farzand turini o'zgartirish
+  const handleFarzandChange = (id, selectedValue) => {
+    setFarzand(prev => 
+      (prev || []).map(member => 
+        member.id === id ? { ...member, type: selectedValue } : member
+      )
+    );
+  };
+
+  // Farzand sanasini o'zgartirish
+  const handleFarzandDateChange = (id, date) => {
+    setFarzand(prev => 
+      (prev || []).map(member => 
+        member.id === id ? { ...member, birthDate: date } : member
+      )
+    );
+  };
+
+  // Farzandni o'chirish
+  const handleFarzandDelete = (id) => {
+    setFarzand(prev => 
+      (prev || []).filter(member => member.id !== id)
+    );
+  };
+
   return (
     <>
-      <div className="container mx-auto h-[100%] p-5 bg-black"  style={{
+      <div className="container mx-auto h-[100%] p-5 bg-black" style={{
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-    <h1 className="text-white text-2xl font-bold size-20 w-[100%] text-center pt-10">Anketa to'ldirish</h1>
+        <h1 className="text-white text-2xl font-bold size-20 w-[100%] text-center pt-10">Anketa to'ldirish</h1>
      
-     <LabelComp text={"Ism"} />
-    <InputComp value={fio} setChange={setFio} placeholder="Ismingizni kiriting"/>
-    
-    <LabelComp text={"Familiya"} />
-    <InputComp value={familiya} setChange={setFamiliya} placeholder="Familiyangizni kiriting"/>
-
-    <LabelComp text={"Otasining ismi"} />
-    <InputComp value={sharif} setChange={setSharif} placeholder="Sharifingizni kiriting"/>
-    <div className="flex justify-between">
-      <div >        
-        <LabelComp text={"Tug'ilgan sana"} />
-        <DateComp value={tsana} setChange={setTsana} />
-      </div>
-      <div>        
-        <LabelComp text={"Jinsingiz"} />
-    <SelectComp  
-      options={jinsOptions}
-        value={jins}
-        onChange={setJins}
-        placeholder="Jinsingizni tanlang" 
-  />
-      </div>
-    </div>
-        <LabelComp text={"Oilaviy holatingiz"} />
-    <SelectComp 
-        options={oilaviyHolatOptions}
-        value={oilaviyHolat}
-        onChange={setOilaviyHolat} 
-        placeholder="Oilaviy holatingiz"
-    />
-
-    <div className="flex justify-between">
-        <LabelComp text={"Farzandlari"} />
+        <LabelComp text={"Ism"} />
+        <InputComp value={fio} setChange={setFio} placeholder="Ismingizni kiriting"/>
         
-      <div className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5">
-  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"/>
-  </svg>
-</div>
-    </div>
-<TableComp 
-  options={farzandOptions}
-  value={farzand}
-  onChange={setFarzand} 
-  setFtsana={setFtsana}
-  ftsana={ftsana}
-  placeholder="Farzandlari"
-/>
+        <LabelComp text={"Familiya"} />
+        <InputComp value={familiya} setChange={setFamiliya} placeholder="Familiyangizni kiriting"/>
+
+        <LabelComp text={"Otasining ismi"} />
+        <InputComp value={sharif} setChange={setSharif} placeholder="Sharifingizni kiriting"/>
+        
+        <div className="flex justify-between">
+          <div>        
+            <LabelComp text={"Tug'ilgan sana"} />
+            <DateComp value={tsana} setChange={setTsana} />
+          </div>
+          <div>        
+            <LabelComp text={"Jinsingiz"} />
+            <SelectComp  
+              options={jinsOptions}
+              value={jins}
+              onChange={setJins}
+              placeholder="Jinsingizni tanlang" 
+            />
+          </div>
+        </div>
+        
+        <LabelComp text={"Oilaviy holatingiz"} />
+        <SelectComp 
+          options={oilaviyHolatOptions}
+          value={oilaviyHolat}
+          onChange={setOilaviyHolat} 
+          placeholder="Oilaviy holatingiz"
+        />
+
+        <div className="flex justify-between items-center">
+          <LabelComp text={"Farzandlari"} />
+          <div onClick={addFamilyMember} className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5 cursor-pointer">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"/>
+            </svg>
+          </div>
+        </div>
+        
+        <TableComp 
+          options={farzandOptions}
+          value={farzand}
+
+          onChange={handleFarzandChange}
+          onDateChange={handleFarzandDateChange}
+          onDelete={handleFarzandDelete}
+        />
 <div className="flex justify-between items-center">
         <LabelComp text={"Oilaviy tarkibingiz"} />
       <div className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5">
@@ -414,12 +453,12 @@ options={fuqarolikOptions}
 
 
 <LabelComp text={"Sog'ligingiz haqida ma'lumotlar? "} />
-<TableComp5
+{/* <TableComp5
   options={SavolJavobdivlaridiv}
   value={SavolJavobdivlaridivOptions}
   text={savolJavoblarIzox}
   setText={setSavolJavoblarIzox}
-/>
+/> */}
 
 <LabelComp text={"Qo'shimcha ma'lumotlar"} />
   <InputComp value={qoshimchaMalumot} setChange={setQoshimchaMalumot}/>
