@@ -37,7 +37,7 @@ export default function UploadingComp2() {
   };
 
   return (
-    <div className="flex  md:flex-row items-center justify-center bg-gray-900 p-6">
+    <div className="flex  md:flex-row items-center justify-center bg-gray-900">
       {/* ID karta old tomoni */}
       <main className="relative z-10 w-full max-w-md">
         <label className="block text-sm font-semibold text-white mb-3">
