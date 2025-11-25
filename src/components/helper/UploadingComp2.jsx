@@ -109,7 +109,7 @@ export default function UploadingComp2() {
 
       {/* ID karta orqa tomoni */}
       <main className="relative z-10 w-full max-w-md">
-        <label className="block text-sm font-semibold text-white mb-3">
+        <label className="block text-sm font-semibold text-white">
           ID karta orqa tomoni <span className="text-red-400">*</span>
         </label>
 
