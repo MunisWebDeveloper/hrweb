@@ -1,75 +1,67 @@
-import DateComp from "./DateComp";
-import InputComp from "./InputComp";
+import SelectComp from "./SelectComp";
 
-function TableComp6({ value, onDateChange, onWorkPlaceChange, onPositionChange, onDelete }) {
+function TableComp7({ 
+  value, 
+  onChange, 
+  onLevelChange, 
+  onDelete,
+  options,
+  options1,
+}) {
   
   // Xavfsizlik tekshiruvlari
   const safeValue = Array.isArray(value) ? value : [];
-
+ const safeOptions = Array.isArray(options) ? options : [];
+ const safeOptions1 = Array.isArray(options1) ? options1 : [];
   return (
     <>
-      <div className="mt-3 overflow-x-auto">
+      <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                <div className="flex flex-col">
-                  <span>Ishga qabul qilingan sana</span>
-                  <hr className="my-1 border-gray-300" />
-                  <span>Ishdan bo'shagan sana</span>
-                </div>
+                Dastur nomi
               </th>
-              
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                <div className="flex flex-col">
-                  <span>Ish joyi nomi</span>
-                  <hr className="my-1 border-gray-300" />
-                  <span>Lavozimingiz</span>
-                </div>
+                Qay darajada
               </th>
-              
               <th className="px-3 py-2 text-left text-xs text-gray-600">
-                O'chirish
+                Amallar
               </th>
             </tr>
           </thead>
           
           <tbody className="bg-white divide-y divide-gray-200">
             {safeValue.length > 0 ? (
-              safeValue.map((work) => (
-                <tr key={work.id} className="hover:bg-gray-50 transition duration-150">
-                  {/* 1-ustun: Sana ma'lumotlari */}
+              safeValue.map((language) => (
+                <tr key={language.id} className="hover:bg-gray-50 transition duration-150">
                   <td className="px-3 py-2 whitespace-nowrap">
-                    <div className="flex flex-col text-xs font-medium text-gray-900 gap-2">
-                      <DateComp 
-                        value={work.startDate || ""} 
-                        setChange={(date) => onDateChange?.(work.id, 'startDate', date)} 
-                      />
-                      <DateComp 
-                        value={work.endDate || ""} 
-                        setChange={(date) => onDateChange?.(work.id, 'endDate', date)} 
+                    <div className="flex items-center">
+                      <div className="ml-3 text-left">
+                        <div className="text-xs font-medium text-gray-900">
+                          <SelectComp 
+                            options={safeOptions} 
+                            value={language.program || ""} 
+                            onChange={(selectedValue) => onChange?.(language.id, selectedValue)} 
+                          />                
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  
+                  <td className="px-3 py-2 whitespace-nowrap text-left">
+                    <div className="text-xs text-gray-900">
+                      <SelectComp 
+                        options={safeOptions1} 
+                        value={language.progprotsent || ""} 
+                        onChange={(selectedValue) => onLevelChange?.(language.id, selectedValue)} 
                       />                
                     </div>
                   </td>
                   
-                  {/* 2-ustun: Ish joyi ma'lumotlari */}
-                  <td className="px-3 py-2 whitespace-nowrap text-left">
-                    <div className="flex flex-col text-xs text-gray-900 gap-2">
-                      <InputComp 
-                        value={work.workPlace || ""} 
-                        setChange={(text) => onWorkPlaceChange?.(work.id, text)} 
-                      />
-                      <InputComp 
-                        value={work.position || ""} 
-                        setChange={(text) => onPositionChange?.(work.id, text)} 
-                      />
-                    </div>
-                  </td>
-                  
-                  {/* 3-ustun: O'chirish tugmasi */}
                   <td className="px-3 py-2 whitespace-nowrap">
                     <button 
-                      onClick={() => onDelete?.(work.id)}
+                      onClick={() => onDelete?.(language.id)}
                       className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs font-medium transition duration-200 flex items-center"
                     >
                       <svg className="w-6 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,4 +89,4 @@ function TableComp6({ value, onDateChange, onWorkPlaceChange, onPositionChange, 
   );
 }
 
-export default TableComp6;
+export default TableComp7;
