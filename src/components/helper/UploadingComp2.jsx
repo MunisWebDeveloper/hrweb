@@ -37,9 +37,9 @@ export default function UploadingComp2() {
   };
 
   return (
-    <div className="flex  md:flex-row items-center justify-center bg-gray-900">
+    <div className="flex items-center gap-4 justify-center bg-gray-900">
       {/* ID karta old tomoni */}
-      <main className="relative z-10 w-full max-w-md">
+      <main >
         <label className="block text-sm font-semibold text-white mb-3">
           ID karta old tomoni <span className="text-red-400">*</span>
         </label>
@@ -108,8 +108,8 @@ export default function UploadingComp2() {
       </main>
 
       {/* ID karta orqa tomoni */}
-      <main className="relative z-10 w-full max-w-md">
-        <label className="block text-sm font-semibold text-white">
+      <main>
+        <label className="block text-sm font-semibold text-white mb-3">
           ID karta orqa tomoni <span className="text-red-400">*</span>
         </label>
 

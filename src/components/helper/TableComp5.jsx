@@ -10,9 +10,12 @@ function TableComp5({
   
   // Savollar doim mavjud
   const questions = [
-    { id: 1, question: "Siz sudlanganmisiz?" },
-    { id: 2, question: "Sizda nogironlik guruhi bormi?" },
-    { id: 3, question: "Siz harbiy xizmatni o'tagansizmi?" }
+    { id: 1, question: "Og'ir narsalar ko'tara olasizmi?" },
+    { id: 2, question: "Yuragingizdan shikoyatingiz bormi?" },
+    { id: 3, question: "Og'ir jarroxlik amaliyotini o'taganmisiz" },
+    { id: 4, question: "Ko'zingizdan shikoyatingiz bormi?" },
+    { id: 5, question: "Bel og'rig'idan shikoyatingiz bormi?"},
+    { id: 6, question: "Bir joyda turib yoki o'tirib ishlay olasizmi?" }
   ];
 
   const safeAnswerOptions = Array.isArray(answerOptions) ? answerOptions : [];

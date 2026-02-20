@@ -12,6 +12,8 @@ import TableComp4 from "./helper/TableComp4"
 import TableComp5 from "./helper/TableComp5"
 import TableComp6 from "./helper/TableComp6"
 import TableComp7 from "./helper/TableComp7"
+import FemelyTable from "./helper/FemelyTable"
+import UploadingComp3 from "./helper/UploadingComp3"
 
 const User = () => {
   const [fio, setFio] = useState("")
@@ -25,8 +27,6 @@ const User = () => {
   const [malumoti,setMalumoti] = useState("")
   const [oqishqabul,setOqishqabul] = useState([])
   const [oqiyotganMalumoti,setOqiyotganMalumoti] = useState([])
-  // const [tilBilishDarajasi,setTilBilishDarajasi] = useState("")
-  // const [tilBilishDarajasiFoyiz,setTilBilishDarajasiFoyiz] = useState("")
   const [boyVazn,setBoyVazn] = useState("")
   const [viloyat,setViloyat] = useState("")
   const [shahar,setShahar] = useState("")
@@ -38,13 +38,7 @@ const User = () => {
   const [ishJoyiBormi,setishJoyiBormi] = useState("")
   const [tanishiBormi,setTanishiBormi] = useState("")
   const [dasturlarniBilishDarajasi,setDasturlarniBilishDarajasi] = useState([])
-  // const [dasturlarniBilishDarajasiFoyiz,setDasturlarniBilishDarajasiFoyiz] = useState("")
-  // const [savolJavoblarIzox,setSavolJavoblarIzox] = useState("")
   const [qoshimchaMalumot,setQoshimchaMalumot] = useState("")
-  // const [ishgaKirganMalumoti,setIshgaKirganMalumoti] = useState([])
-  // const [ishdanBoshaganMalumot,setIshdanBoshaganMalumot] = useState("")
-  // const [ishJoyiNomi,setIshJoyiNomi] = useState("")
-  // const [lavozimi,setLavozimi] = useState("")
   const [eskiIshHaqi,setEskiIshHaqi] = useState("")
   const [xoxlanayotganIshHaqi,setXoxlanayotganIshHaqi] = useState("")
   const [avtomobili,setAvtomobili] = useState("")
@@ -52,11 +46,11 @@ const User = () => {
   const [sudlanganmi,setSudlanganmi] = useState("")
   const [qoshimchaRaqam,setQoshimchaRaqam] = useState("")
   const [passportTuri,setPassportTuri] = useState(true)
-
   const jinsOptions = [
     { value: "erkak", label: "Erkak" },
     { value: "ayol", label: "Ayol" }
   ]
+  const [checkbox , setCheckbox] = useState(false)
   const oilaviyHolatOptions = [
     { value: "uylangan", label: "Uylangan" },
     { value: "bo'ydoq", label: "Bo'ydoq" },
@@ -174,14 +168,7 @@ const User = () => {
     { value: "90%", label: "90%" },
     { value: "100%", label: "100%" },
   ]
-  const SavolJavoblar = [
-    { value: "Og'ir narsalar ko'tara olasizmi?", label: "Og'ir narsalar ko'tara olasizmi?" },
-    { value: "Yuragingizdan shikoyatingiz bormi?", label: "Yuragingizdan shikoyatingiz bormi?" },
-    { value: "Og'ir jarroxlik amaliyotini o'taganmisiz?", label: "Og'ir jarroxlik amaliyotini o'taganmisiz?" },
-    { value: "Ko'zingizdan shikoyatingiz bormi?", label: "Ko'zingizdan shikoyatingiz bormi?" },
-    { value: "Bel og'rig'idan shikoyatingiz bormi?", label: "Bel og'rig'idan shikoyatingiz bormi?" },
-    { value: "Bir joyda turib yoki o'tirib ishlay olasizmi?", label: "Bir joyda turib yoki o'tirib ishlay olasizmi?" },
-  ]
+
   const SavolJavobOptions = [
     { value: "Xa", label: "Xa" },
     { value: "Yo'q", label: "Yo'q" }
@@ -203,9 +190,9 @@ const User = () => {
     { value: "Yo'q", label: "Yo'q" }
   ]
   const passportTuriOption = [
-    { value: true, label: "ID karta" },
-    { value: false, label: "Oddiy" }
-  ]
+  { label: "Id karta", value: "true" },
+  { label: "Passport", value: "false" }
+]
 
   const ConsoleUser = () =>{
     // console.log(fio);
@@ -548,7 +535,7 @@ const handleWorkDelete = (id) => {
         <InputComp value={sharif} setChange={setSharif} placeholder="Sharifingizni kiriting"/>
         
         <div className="flex justify-between">
-          <div>        
+          <div className="flex flex-col">        
             <LabelComp text={"Tug'ilgan sana"} />
             <DateComp value={tsana} setChange={setTsana} />
           </div>
@@ -563,12 +550,12 @@ const handleWorkDelete = (id) => {
           </div>
         </div>
         
-        <LabelComp text={"Oilaviy holatingiz"} />
+        <LabelComp text={"Oilaviy xolatingiz"} />
         <SelectComp 
           options={oilaviyHolatOptions}
           value={oilaviyHolat}
           onChange={setOilaviyHolat} 
-          placeholder="Oilaviy holatingiz"
+          placeholder="Oilaviy xolatingiz"
         />
 
         <div className="flex justify-between items-center">
@@ -595,7 +582,7 @@ const handleWorkDelete = (id) => {
   </svg>
 </div>
     </div>
-<TableComp2 
+<FemelyTable 
   options={otarkibOptions}
   value={otarkib}
   onChange={handleMyFarzandChange}
@@ -745,7 +732,7 @@ options={fuqarolikOptions}
   answerOptions={answerOptions}
 />
 
-<LabelComp text={"Qayerda qachon va kim bo'lib ishlagansiz?. (Sizning rasmiy va norasmiy ish tajribangiz biz uchun muhim)"} />
+<LabelComp text={"Qo'shimcha m'lumotlar"} />
   <InputComp value={qoshimchaMalumot} setChange={setQoshimchaMalumot}/>
 
   <div className="flex justify-between items-center">
@@ -799,28 +786,37 @@ options={fuqarolikOptions}
     <InputComp value={qoshimchaRaqam} setChange={setQoshimchaRaqam} placeholder="+998" />
     <div className="text-white flex justify-center">Xatolok roy bersa bizga murojat qiling @Yordam</div>
     <UploadBox/>
+
     <LabelComp text={"Pasport turi"} />
 <SelectComp className="mb-3"
    options={passportTuriOption} 
   value={passportTuri}
   onChange={setPassportTuri}
 />
+
+{passportTuri ? 
 <UploadingComp2 />
-    <div className="text-white flex gap-3">
-       <input
-        type="checkbox"
-        // checked={checked}
-        // onChange={onChange}
-          className="peer h-5 w-5 bg-white appearance-none cursor-pointer
-                   border border-gray-400 rounded-sm 
-                   transition-all duration-200
-                   checked:bg-[#8A7A27] checked:border-[#8A7A27]"
-      />
+:
+<UploadingComp3 />
+}
+    <div className="text-white flex gap-3 p-2">
+      <input
+    type="checkbox"
+    checked={checkbox}
+    onChange={(e)=>setCheckbox(e.target.checked)}
+    className="w-5 h-5 accent-blue-600"
+  />
       <p>
 Roziman * <a href="" className="text-red-500">(Rozilik shartlari bilan tanishish)</a></p>
     </div>
     <div className="w-full flex justify-center">
-      <button onClick={ConsoleUser} className="text-white bg-sky-600 min-h-14 w-full rounded">Anketani yuborish</button>
+      <button onClick={ConsoleUser} disabled={!checkbox} className={`text-white ${checkbox ? 'bg-sky-600' : 'bg-slate-600'} min-h-14 w-full rounded`}>
+        {checkbox ?
+        'Anketani yuborish'
+        :
+        'Rozilik bildiring'
+        }
+      </button>
     </div>
 </div>
     </>
