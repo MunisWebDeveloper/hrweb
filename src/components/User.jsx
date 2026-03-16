@@ -4,6 +4,7 @@ import SelectComp from "./helper/SelectComp"
 import UploadBox from "./helper/UploadComp"
 import UploadingComp2 from "./helper/UploadingComp2"
 import TableComp7 from "./helper/TableComp7"
+<<<<<<< HEAD
 import UserInfo from "./UserInfo"
 import EducationInfo from "./EducationInfo"
 import PersonalInfo from "./PersonalInfo"
@@ -48,10 +49,47 @@ const User = () => {
   const [Users] = usePostUsersMutation()
 
   // ── Options ────────────────────────────────────────────────────────────────
+=======
+import FemelyTable from "./helper/FemelyTable"
+import UploadingComp3 from "./helper/UploadingComp3"
+
+const User = () => {
+  const [fio, setFio] = useState("")
+  const [familiya, setFamiliya] = useState("")
+  const [sharif, setSharif] = useState("")
+  const [tsana, setTsana] = useState("")
+  const [jins, setJins] = useState("")
+  const [oilaviyHolat, setOilaviyHolat] = useState("")
+  const [farzand, setFarzand] = useState([])
+  const [otarkib,setOtarkib] = useState([])
+  const [malumoti,setMalumoti] = useState("")
+  const [oqishqabul,setOqishqabul] = useState([])
+  const [oqiyotganMalumoti,setOqiyotganMalumoti] = useState([])
+  const [boyVazn,setBoyVazn] = useState("")
+  const [viloyat,setViloyat] = useState("")
+  const [shahar,setShahar] = useState("")
+  const [mfy,setMfy] = useState("")
+  const [xoxlaydiganFilial,setXoxlaydiganFilial] = useState("")
+  const [xoxlaydiganLavozim,setXoxlaydiganLavozim] = useState("")
+  const [avvalIshlaganmi,setAvvalIshlaganmi] = useState("")
+  const [fuqarolik,setFuqarolik] = useState("")
+  const [ishJoyiBormi,setishJoyiBormi] = useState("")
+  const [tanishiBormi,setTanishiBormi] = useState("")
+  const [dasturlarniBilishDarajasi,setDasturlarniBilishDarajasi] = useState([])
+  const [qoshimchaMalumot,setQoshimchaMalumot] = useState("")
+  const [eskiIshHaqi,setEskiIshHaqi] = useState("")
+  const [xoxlanayotganIshHaqi,setXoxlanayotganIshHaqi] = useState("")
+  const [avtomobili,setAvtomobili] = useState("")
+  const [malumotOlgani,setMalumotOlgani] = useState("")
+  const [sudlanganmi,setSudlanganmi] = useState("")
+  const [qoshimchaRaqam,setQoshimchaRaqam] = useState("")
+  const [passportTuri,setPassportTuri] = useState(true)
+>>>>>>> 997f115acbef17978a32625d2b7ff7be4aec4a15
   const jinsOptions = [
     { value: "erkak", label: "Erkak" },
     { value: "ayol",  label: "Ayol"  },
   ]
+  const [checkbox , setCheckbox] = useState(false)
   const oilaviyHolatOptions = [
     { value: "uylangan",  label: "Uylangan"  },
     { value: "bo'ydoq",   label: "Bo'ydoq"   },
@@ -153,6 +191,7 @@ const User = () => {
     { value: "Instagram",     label: "Instagram"     },
   ]
   const dasturlarniBilishDarajasiFoyizOptions = [
+<<<<<<< HEAD
     { value: "10",  label: "10%"  },
     { value: "20",  label: "20%"  },
     { value: "30",  label: "30%"  },
@@ -163,6 +202,23 @@ const User = () => {
     { value: "80",  label: "80%"  },
     { value: "90",  label: "90%"  },
     { value: "100", label: "100%" },
+=======
+    { value: "10%", label: "10%" },
+    { value: "20%", label: "20%" },
+    { value: "30%", label: "30%" },
+    { value: "40%", label: "40%" },
+    { value: "50%", label: "50%" },
+    { value: "60%", label: "60%" },
+    { value: "70%", label: "70%" },
+    { value: "80%", label: "80%" },
+    { value: "90%", label: "90%" },
+    { value: "100%", label: "100%" },
+  ]
+
+  const SavolJavobOptions = [
+    { value: "Xa", label: "Xa" },
+    { value: "Yo'q", label: "Yo'q" }
+>>>>>>> 997f115acbef17978a32625d2b7ff7be4aec4a15
   ]
   const avtomobiliOption = [
     { value: "Xa",   label: "Xa"   },
@@ -180,10 +236,17 @@ const User = () => {
     { value: "Xa",   label: "Xa"   },
     { value: "Yo'q", label: "Yo'q" },
   ]
+<<<<<<< HEAD
   const xizmatSafariOption = [
     { value: "Xa",   label: "Xa"   },
     { value: "Yo'q", label: "Yo'q" },
   ]
+=======
+  const passportTuriOption = [
+  { label: "Id karta", value: "true" },
+  { label: "Passport", value: "false" }
+]
+>>>>>>> 997f115acbef17978a32625d2b7ff7be4aec4a15
 
   // ── Savol-javoblar ─────────────────────────────────────────────────────────
   const [questionnaire, setQuestionnaire] = useState([
@@ -421,6 +484,7 @@ const User = () => {
   }
   return (
     <>
+<<<<<<< HEAD
       <div
         className="container mx-auto h-[100%] p-5 bg-black"
         style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
@@ -452,6 +516,46 @@ const User = () => {
           handleMyFamilyDateChange={handleMyFamilyDateChange}
           handleCommentChange={handleCommentChanges}
           handleMyFamilyDelete={handleMyFamilyDelete}
+=======
+      <div className="container mx-auto h-[100%] p-5 bg-black" style={{
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <h1 className="text-white text-2xl font-bold size-20 w-[100%] text-center pt-10">Anketa to'ldirish</h1>
+     
+        <LabelComp text={"Ism"} />
+        <InputComp value={fio} setChange={setFio} placeholder="Ismingizni kiriting"/>
+        
+        <LabelComp text={"Familiya"} />
+        <InputComp value={familiya} setChange={setFamiliya} placeholder="Familiyangizni kiriting"/>
+
+        <LabelComp text={"Otasining ismi"} />
+        <InputComp value={sharif} setChange={setSharif} placeholder="Sharifingizni kiriting"/>
+        
+        <div className="flex justify-between">
+          <div className="flex flex-col">        
+            <LabelComp text={"Tug'ilgan sana"} />
+            <DateComp value={tsana} setChange={setTsana} />
+          </div>
+          <div>        
+            <LabelComp text={"Jinsingiz"} />
+            <SelectComp  
+              options={jinsOptions}
+              value={jins}
+              onChange={setJins}
+              placeholder="Jinsingizni tanlang" 
+            />
+          </div>
+        </div>
+        
+        <LabelComp text={"Oilaviy xolatingiz"} />
+        <SelectComp 
+          options={oilaviyHolatOptions}
+          value={oilaviyHolat}
+          onChange={setOilaviyHolat} 
+          placeholder="Oilaviy xolatingiz"
+>>>>>>> 997f115acbef17978a32625d2b7ff7be4aec4a15
         />
 
         <EducationInfo
@@ -474,6 +578,25 @@ const User = () => {
           tilBilishDarajasiOptions={tilBilishDarajasiOptions}
           tilBilishDarajasiFoyizOptions={tilBilishDarajasiFoyizOptions}
         />
+<<<<<<< HEAD
+=======
+<div className="flex justify-between items-center">
+        <LabelComp text={"Oilaviy tarkibingiz"} />
+      <div onClick={addMyFamilyMember} className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5">
+  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"/>
+  </svg>
+</div>
+    </div>
+<FemelyTable 
+  options={otarkibOptions}
+  value={otarkib}
+  onChange={handleMyFarzandChange}
+  onDateChange={handleMyFamilyDateChange}  
+  onCommentChange={handleCommentChange}    
+  onDelete={handleMyFamilyDelete}
+/>
+>>>>>>> 997f115acbef17978a32625d2b7ff7be4aec4a15
 
         <PersonalInfo
           xizmatSafari={xizmatSafari}
@@ -573,6 +696,7 @@ const User = () => {
           </p>
         </div>
 
+<<<<<<< HEAD
         <div className="w-full flex justify-center">
           <button
             onClick={addUser}
@@ -583,6 +707,182 @@ const User = () => {
           </button>
         </div>
       </div>
+=======
+  <LabelComp text={"Viloyat (Haqiqiy turar joy) *"} />
+<SelectComp className="mb-3"
+  options={viloyatOptions} 
+  value={viloyat}
+  onChange={setViloyat}
+/>
+
+  <LabelComp text={"Shaxar/Tuman (Haqiqiy turar joy)"} />
+<SelectComp className="mb-3" 
+  options={shaharOptions} 
+  value={shahar}
+  onChange={setShahar}
+/>
+
+ <LabelComp text={"Manzilingiz (Haqiqiy turar joy MFY, ko'cha)"} />
+    <InputComp
+    value={mfy}
+    setChange={setMfy}
+    />
+
+    <LabelComp text={"Qaysi filialda ishlashni xohlaysiz? "} />
+<SelectComp className="mb-3" 
+  options={xoxlaydiganFilialOptions}
+  value={xoxlaydiganFilial}
+  onChange={setXoxlaydiganFilial}
+/>
+
+<LabelComp text={"Qaysi lavozimlarda ishlashni xohlaysiz?"} />
+<SelectComp className="mb-3" 
+  options={xoxlaydiganLavozimOptions} 
+  value={xoxlaydiganLavozim}
+  onChange={setXoxlaydiganLavozim}
+/>
+
+<LabelComp text={"Avval bizning kompaniyamizda ishlaganmisiz?"} />
+<SelectComp className="mb-3" 
+  options={avvalIshlaganmiOptions} 
+  value={avvalIshlaganmi}
+  onChange={setAvvalIshlaganmi}
+/>
+
+<LabelComp text={"O'zbekiston Respubilkasi fuqorosimisiz?"} />
+<SelectComp className="mb-3"
+options={fuqarolikOptions} 
+  value={fuqarolik}
+  onChange={setFuqarolik}
+/>
+<LabelComp text={"Hozirda ish bilan ta'minlanganmisiz?"} />
+<SelectComp className="mb-3"
+  options={ishJoyiBormiOptions} 
+  value={ishJoyiBormi}
+  onChange={setishJoyiBormi}
+/>
+<LabelComp text={"MUNIS komponyasida ishlaydigan yaqin qarindoshingiz bormi?"} />
+    <InputComp
+      value={tanishiBormi}
+      setChange={setTanishiBormi}
+    />
+
+ <div className="flex justify-between items-center">
+        <LabelComp text={"Qaysi dasturlardan foydalana olasiz?"} />
+      <div onClick={adddasturlarniBilishDarajasiMalumoti} className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5">
+  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"/>
+  </svg>
+</div>
+    </div>
+
+  <TableComp7
+
+  value={dasturlarniBilishDarajasi}
+  onChange={handledasturlarniBilishDarajasiMalumoti}
+  onLevelChange={handledasturlarniBilishDarajasiLevelChange}
+  onDelete={handledasturlarniBilishDarajasiMalumotiDelete}
+  options={dasturlarniBilishDarajasiOptions}
+  options1={dasturlarniBilishDarajasiFoyizOptions}
+  />
+
+
+<LabelComp text={"Sog'ligingiz haqida ma'lumotlar? "} />
+<TableComp5
+  questionnaire={questionnaire}
+  onAnswerChange={handleAnswerChange}
+  onCommentChange={handleCommentChange}
+  answerOptions={answerOptions}
+/>
+
+<LabelComp text={"Qo'shimcha m'lumotlar"} />
+  <InputComp value={qoshimchaMalumot} setChange={setQoshimchaMalumot}/>
+
+  <div className="flex justify-between items-center">
+        <LabelComp text={"Qayerda qachon va kim bo'lib ishlagansiz?. (Sizning rasmiy va norasmiy ish tajribangiz biz uchun muhim"} />
+      <div onClick={addWorkExperience} className="bg-blue-700 p-1 rounded-[10%] flex items-center justify-center w-10 h-5">
+  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"/>
+  </svg>
+</div>
+    </div>
+
+<TableComp6
+  value={dasturlarniBilishDarajasi}
+  onDateChange={handleWorkDateChange}
+  onWorkPlaceChange={handleWorkPlaceChange}
+  onPositionChange={handlePositionChange}
+  onDelete={handleWorkDelete}
+/>
+
+<LabelComp text={"Oxirgi ish joyida olgan ish xaqingiz? (so'm)"} />
+    <InputComp value={eskiIshHaqi} setChange={setEskiIshHaqi}/>
+
+    <LabelComp text={"Qancha maosh xoxlaysiz? (so'm) "} />
+    <InputComp value={xoxlanayotganIshHaqi} setChange={setXoxlanayotganIshHaqi}/>
+    
+    <LabelComp text={"Shaxsiy avtomabilingiz bormi? "} />
+<SelectComp className="mb-3"
+  options={avtomobiliOption} 
+  value={avtomobili}
+  onChange={setAvtomobili}
+/>
+<LabelComp text={"Bo'sh ish o'rni haqida qayerdan bildingiz?"} />
+<SelectComp className="mb-3" 
+  options={malumotOlganiOption} 
+  value={malumotOlgani}
+  onChange={setMalumotOlgani}
+/>
+<LabelComp text={"Xizmat safariga bora olasizmi (Boshqa viloyat yoki tuman filiallarimizda ishlay olasizmi)?"} />
+<SelectComp className="mb-3"
+  options={avtomobiliOption} 
+  value={avtomobili}
+  onChange={setAvtomobili}
+/>
+<LabelComp text={"Sudlanganmisiz?"} />
+<SelectComp className="mb-3" 
+  options={sudlanganmiOption} 
+  value={sudlanganmi}
+  onChange={setSudlanganmi}
+/>
+ <LabelComp text={"Qo'shimcha telefon raqam"} />
+    <InputComp value={qoshimchaRaqam} setChange={setQoshimchaRaqam} placeholder="+998" />
+    <div className="text-white flex justify-center">Xatolok roy bersa bizga murojat qiling @Yordam</div>
+    <UploadBox/>
+
+    <LabelComp text={"Pasport turi"} />
+<SelectComp className="mb-3"
+   options={passportTuriOption} 
+  value={passportTuri}
+  onChange={setPassportTuri}
+/>
+
+{passportTuri ? 
+<UploadingComp2 />
+:
+<UploadingComp3 />
+}
+    <div className="text-white flex gap-3 p-2">
+      <input
+    type="checkbox"
+    checked={checkbox}
+    onChange={(e)=>setCheckbox(e.target.checked)}
+    className="w-5 h-5 accent-blue-600"
+  />
+      <p>
+Roziman * <a href="" className="text-red-500">(Rozilik shartlari bilan tanishish)</a></p>
+    </div>
+    <div className="w-full flex justify-center">
+      <button onClick={ConsoleUser} disabled={!checkbox} className={`text-white ${checkbox ? 'bg-sky-600' : 'bg-slate-600'} min-h-14 w-full rounded`}>
+        {checkbox ?
+        'Anketani yuborish'
+        :
+        'Rozilik bildiring'
+        }
+      </button>
+    </div>
+</div>
+>>>>>>> 997f115acbef17978a32625d2b7ff7be4aec4a15
     </>
   )
 }
