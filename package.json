@@ -9,12 +9,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "tailwind:init": "tailwindcss init -p"
+    "tailwind:init": "tailwindcss init -p",
+    "deploy": "scp -r -P 4321 ./dist/* root@83.222.7.122:/var/www/munisacv/html/"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
+    "lucide-react": "^0.577.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-i18next": "^16.6.2",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.6"
   },

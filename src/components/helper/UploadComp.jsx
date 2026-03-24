@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function UploadBox({ selectedImage, setSelectedImage }) {
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -17,12 +18,12 @@ export default function UploadBox({ selectedImage, setSelectedImage }) {
     setPreviewUrl(null);
     if (inputRef.current) inputRef.current.value = "";
   };
-
+const {t} = useTranslation()
   return (
     <div className="flex items-center justify-center bg-gray-900 p-6">
       <main className="relative z-10 w-full max-w-md">
         <label className="block text-sm font-semibold text-white mb-3">
-          Shaxsiy rasmingiz <span className="text-red-400">*</span>
+          {t("shaxsiyrasm")}<span className="text-red-400">*</span>
         </label>
 
         {previewUrl ? (

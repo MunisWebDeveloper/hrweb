@@ -8,7 +8,7 @@ function TableComp({options, value, onChange, onDateChange, onDelete}) {
 
   return (
     <>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-scroll">
         <table className="w-full text-sm">
           <thead className="bg-gray-100">
             <tr>

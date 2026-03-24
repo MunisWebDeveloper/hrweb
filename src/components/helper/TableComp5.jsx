@@ -7,21 +7,6 @@ function TableComp5({
   onCommentChange, 
   answerOptions 
 }) {
-  
-<<<<<<< HEAD
-
-=======
-  // Savollar doim mavjud
-  const questions = [
-    { id: 1, question: "Og'ir narsalar ko'tara olasizmi?" },
-    { id: 2, question: "Yuragingizdan shikoyatingiz bormi?" },
-    { id: 3, question: "Og'ir jarroxlik amaliyotini o'taganmisiz" },
-    { id: 4, question: "Ko'zingizdan shikoyatingiz bormi?" },
-    { id: 5, question: "Bel og'rig'idan shikoyatingiz bormi?"},
-    { id: 6, question: "Bir joyda turib yoki o'tirib ishlay olasizmi?" }
-  ];
->>>>>>> 997f115acbef17978a32625d2b7ff7be4aec4a15
-
   const safeAnswerOptions = Array.isArray(answerOptions) ? answerOptions : [];
 
   return (
