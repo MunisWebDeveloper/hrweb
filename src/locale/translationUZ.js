@@ -45,5 +45,4 @@ const translationUZ = {
     belinfo:"Bel og'rig'idan shikoyatingiz bormi?",
     birjoyinfo:"Bir joyda turib yoki o'tirib ishlay olasizmi?"
 }
-
 export default translationUZ

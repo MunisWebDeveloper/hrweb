@@ -2,14 +2,27 @@ import DateComp from "./DateComp";
 import SelectComp from "./SelectComp";
 
 function TableComp({options, value, onChange, onDateChange, onDelete}) {
-  // Xavfsizlik tekshiruvlari
   const safeValue = Array.isArray(value) ? value : [];
   const safeOptions = Array.isArray(options) ? options : [];
 
   return (
     <>
-      <div className="overflow-x-scroll">
-        <table className="w-full text-sm">
+      <style>{`
+        .custom-scroll::-webkit-scrollbar {
+          height: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+          background: red;
+          border-radius: 10px;
+        }
+      `}</style>
+
+      <div className="w-full overflow-x-scroll custom-scroll">
+        <table className="w-full md:min-w-0 min-w-[480px] text-sm">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-3 py-2 text-left text-xs text-gray-600">
@@ -28,22 +41,20 @@ function TableComp({options, value, onChange, onDateChange, onDelete}) {
             {safeValue.length > 0 ? (
               safeValue.map((member) => (
                 <tr key={member.id} className="hover:bg-gray-50 transition duration-150">
-                  <td className="px-3 py-2 whitespace-nowrap">
+                  <td className="px-3 py-2">
                     <SelectComp 
                       options={safeOptions} 
                       value={member.type || ""} 
                       onChange={(selectedValue) => onChange?.(member.id, selectedValue)}
                     />
                   </td>
-                  
-                  <td className="px-3 py-2 whitespace-nowrap text-left">
+                  <td className="px-3 py-2">
                     <DateComp 
                       value={member.birthDate || ""} 
                       setChange={(date) => onDateChange?.(member.id, date)} 
                     />
                   </td>
-                  
-                  <td className="px-3 py-2 whitespace-nowrap">
+                  <td className="px-3 py-2">
                     <button 
                       onClick={() => onDelete?.(member.id)}
                       className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs font-medium transition duration-200 flex items-center"
@@ -57,12 +68,9 @@ function TableComp({options, value, onChange, onDateChange, onDelete}) {
               ))
             ) : (
               <tr>
-                <td colSpan={3} className="px-3 py-2 text-center">
-                  <div className="w-full min-h-30 flex items-center justify-center text-gray-500">
-                    Ma'lumotlar kiritilmagan.
-                    <br/>
-                    (Kiritish uchun '+' tugmasini bosing)
-                  </div>
+                <td colSpan={3} className="px-3 py-8 text-center text-gray-500 text-xs">
+                  Ma'lumotlar kiritilmagan.<br/>
+                  (Kiritish uchun '+' tugmasini bosing)
                 </td>
               </tr>
             )}

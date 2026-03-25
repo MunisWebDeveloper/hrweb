@@ -9,10 +9,11 @@ import EducationInfo from "./EducationInfo"
 import PersonalInfo from "./PersonalInfo"
 import PersonalAddInfo from "./PersonalAddInfo"
 import CheckboxExample from "./helper/CheckboxForm"
-import { usePostUsersMutation, useGetRegionsQuery, useGetStreetQuery, useGetLavozimQuery,useGetFiliallsQuery,useGetSkillsQuery } from './api/UsersApi'
+import { usePostUsersMutation, useGetRegionsQuery, useGetStreetQuery, useGetLavozimQuery, useGetFiliallsQuery, useGetSkillsQuery } from './api/UsersApi'
 import AddModal from "./helper/AddModal"
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next"
+
 const User = ({ getLang }) => {
   const [fio, setFio] = useState("")
   const [tsana, setTsana] = useState("")
@@ -48,7 +49,7 @@ const User = ({ getLang }) => {
   const [backImage, setBackImage] = useState(null)
   const [regionsmain, setRegionsmain] = useState()
   const [streetmain, setStreetmain] = useState([])
- const {t} = useTranslation()
+  const { t } = useTranslation()
 
   // API hooks
   const { data: regions = [], isLoading: regionsLoading } = useGetRegionsQuery()
@@ -60,20 +61,18 @@ const User = ({ getLang }) => {
     skip: !regionsmain
   })
   const { lang, id } = useParams();
-  // console.log(lang); // ru
-    // console.log(id);   // 123
   const [Users] = usePostUsersMutation()
-  // street yangilanganda streetmain ni set qilish
+
   useEffect(() => {
     if (street?.length > 0) {
       setStreetmain(street)
     }
   }, [street])
+
   useEffect(() => {
     getLang(lang)
   }, [])
 
-  // Viloyat o'zgarganda shaharni reset qilish
   useEffect(() => {
     setShahar("")
     setStreetmain([])
@@ -89,7 +88,6 @@ const User = ({ getLang }) => {
     setShahar(selectedValue)
   }
 
-  // Options
   const jinsOptions = [
     { value: "erkak", label: "Erkak" },
     { value: "ayol", label: "Ayol" },
@@ -155,16 +153,15 @@ const User = ({ getLang }) => {
     label: item.name_uz || item.name
   }))
 
- const xoxlaydiganFilialOptions = filials?.map(item => ({
-  value: String(item.id),
-  label: item.lang_uz
-})) || []
+  const xoxlaydiganFilialOptions = filials?.map(item => ({
+    value: String(item.id),
+    label: item.lang_uz
+  })) || []
 
-
- const xoxlaydiganLavozimOptions = lavozim?.map(item => ({
-  value: String(item.id),
-  label: item.title_uz
-})) || []
+  const xoxlaydiganLavozimOptions = lavozim?.map(item => ({
+    value: String(item.id),
+    label: item.title_uz
+  })) || []
 
   const avvalIshlaganmiOptions = [
     { value: "Xa", label: "Xa" },
@@ -181,10 +178,10 @@ const User = ({ getLang }) => {
     { value: "Yo'q", label: "Yo'q" },
   ]
 
- const dasturlarniBilishDarajasiOptions = skills.map(item => ({
-  value: item.name,
-  label: item.name
-}))
+  const dasturlarniBilishDarajasiOptions = skills.map(item => ({
+    value: item.id,
+    label: item.name
+  }))
 
   const dasturlarniBilishDarajasiFoyizOptions = [
     { value: "10", label: "10%" }, { value: "20", label: "20%" },
@@ -218,16 +215,16 @@ const User = ({ getLang }) => {
     { value: "Yo'q", label: "Yo'q" },
   ]
 
- useEffect(() => {
-  setQuestionnaire([
-    { id: 1, question: t("ogirinfo"), answer: "", comment: "" },
-    { id: 2, question: t("yurakinfo"), answer: "", comment: "" },
-    { id: 3, question: t("jarroxlikinfo"), answer: "", comment: "" },
-    { id: 4, question: t("kozinfo"), answer: "", comment: "" },
-    { id: 5, question: t("belinfo"), answer: "", comment: "" },
-    { id: 6, question: t("birjoyinfo"), answer: "", comment: "" },
-  ]);
-}, [t]);
+  useEffect(() => {
+    setQuestionnaire([
+      { id: 1, question: t("ogirinfo"), answer: "", comment: "" },
+      { id: 2, question: t("yurakinfo"), answer: "", comment: "" },
+      { id: 3, question: t("jarroxlikinfo"), answer: "", comment: "" },
+      { id: 4, question: t("kozinfo"), answer: "", comment: "" },
+      { id: 5, question: t("belinfo"), answer: "", comment: "" },
+      { id: 6, question: t("birjoyinfo"), answer: "", comment: "" },
+    ]);
+  }, [t]);
 
   const answerOptions = [
     { value: "ha", label: "Ha" },
@@ -372,9 +369,19 @@ const User = ({ getLang }) => {
   const addUser = async () => {
     if (!validate()) return
     try {
+      // ✅ tg_id ni to'g'ri integer qilib olish
+      const telegram = window?.Telegram?.WebApp
+      const tgUserId = telegram?.initDataUnsafe?.user?.id || id
+      const tgId = parseInt(tgUserId)
+
+      if (!tgId || isNaN(tgId)) {
+        alert("Telegram ID topilmadi! Iltimos ilovani Telegram orqali oching.")
+        return
+      }
+
       const obj_in = {
         is_active: true,
-        tg_id: id,
+        tg_id: tgId,                              // ✅ integer
         fullName: fio,
         birthdate: toDate(tsana),
         gender: jins,
@@ -432,10 +439,46 @@ const User = ({ getLang }) => {
 
       const result = await Users(formData).unwrap()
       console.log("✅ Muvaffaqiyatli:", result)
-      alert("Ma'lumotlar muvaffaqiyatli yuborildi!")
+
+      // ✅ Muvaffaqiyatli bo'lganda Telegram popup va mini app yopish
+      if (telegram) {
+        telegram.showPopup(
+          {
+            title: "✅ Muvaffaqiyatli",
+            message: "Ma'lumotlar muvaffaqiyatli yuborildi! siz bilan 3 ish kuni ichida aloqaga chiqamiz",
+            buttons: [{ type: "ok" }],
+          },
+          () => {
+            telegram.close() // OK bosilgandan keyin mini app yopiladi
+          }
+        )
+      } else {
+        alert("Ma'lumotlar muvaffaqiyatli yuborildi!")
+      }
+
     } catch (err) {
-      console.error("❌ Server xatosi:", err?.data || err)
-      alert("Xatolik yuz berdi: " + (err?.data?.message || "Server bilan bog'lanib bo'lmadi"))
+      console.error("❌ To'liq xato:", JSON.stringify(err, null, 2))
+      console.error("Status:", err?.status)
+      console.error("Data:", err?.data)
+      console.error("Error:", err?.error)
+
+      const msg = err?.data?.detail
+        || err?.data?.message
+        || err?.error
+        || JSON.stringify(err?.data)
+        || "Server bilan bog'lanib bo'lmadi"
+
+      // ✅ Xato bo'lganda ham Telegram popup ishlatish
+      const telegram = window?.Telegram?.WebApp
+      if (telegram) {
+        telegram.showPopup({
+          title: "❌ Xatolik",
+          message: String(msg),
+          buttons: [{ type: "ok" }],
+        })
+      } else {
+        alert("Xatolik: " + msg)
+      }
     }
   }
 
@@ -448,7 +491,7 @@ const User = ({ getLang }) => {
       {regionsLoading && <div className="text-white text-center py-4">Viloyatlar yuklanmoqda...</div>}
       {lavozimLoading && <div className="text-white text-center py-2">Lavozimlar yuklanmoqda...</div>}
       {streetLoading && <div className="text-white text-center py-2">Shaharlar yuklanmoqda...</div>}
-    {/* <AddModal isOpen={true} disabl={disabl} setDisabl={setDisabl} /> */}
+
       <UserInfo
         fio={fio} setFio={setFio}
         tsana={tsana} setTsana={setTsana}

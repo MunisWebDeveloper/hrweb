@@ -8,7 +8,20 @@ function TableComp6({ value, onChange, onDateChange, onWorkPlaceChange, onPositi
 
   return (
     <>
-      <div className="mt-3 overflow-x-auto">
+     <style>{`
+        .custom-scroll::-webkit-scrollbar {
+          height: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+          background: red;
+          border-radius: 10px;
+        }
+      `}</style>
+      <div className="w-full overflow-x-scroll custom-scroll">
         <table className="w-full text-sm">
           <thead className="bg-gray-100">
             <tr>

@@ -44,5 +44,4 @@ const translationRU = {
     belinfo: "Есть ли у вас боли в пояснице?",
     birjoyinfo: "Можете ли работать стоя или сидя в одном месте?"
 }
-
 export default translationRU

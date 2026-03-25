@@ -10,7 +10,20 @@ function TableComp5({
   const safeAnswerOptions = Array.isArray(answerOptions) ? answerOptions : [];
 
   return (
-    <div className="overflow-x-auto">
+    <div className="w-full overflow-x-scroll custom-scroll">
+       <style>{`
+        .custom-scroll::-webkit-scrollbar {
+          height: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+          background: red;
+          border-radius: 10px;
+        }
+      `}</style>
       <table className="w-full text-sm">
         <thead className="bg-gray-100">
           <tr>

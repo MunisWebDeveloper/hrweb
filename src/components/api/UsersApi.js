@@ -6,68 +6,86 @@ export const userApi = createApi({
     baseUrl: import.meta.env.VITE_API_URL,
 
     prepareHeaders: (headers) => {
+      // 🔐 TOKEN
       const token = localStorage.getItem("token");
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
-      // ← Accept qolsin, lekin Content-Type YO'Q
-      // FormData bo'lganda browser o'zi "multipart/form-data" qo'yadi
+
+      // 📱 TELEGRAM INIT DATA (ENG MUHIM)
+      const telegram = window?.Telegram?.WebApp;
+      const initData = telegram?.initData;
+
+      if (initData) {
+        headers.set("X-Telegram-Init-Data", initData);
+      }
+
+      // 📦 Accept
       headers.set("Accept", "application/json");
+
       return headers;
     },
-  
   }),
 
-
-
   endpoints: (builder) => ({
+    
+    // 🔥 CREATE USER (FORMDATA)
     postUsers: builder.mutation({
       query: (formData) => ({
         url: "/api/v1/cv/",
         method: "POST",
-        // ❌ "Content-Type": "application/json" — O'CHIRING!
-        // FormData bilan bu header bo'lsa backend o'qiy olmaydi
-        body: formData,
+        body: formData, // ❗ Content-Type qo‘ymaymiz
       }),
-      
     }),
+
+    // 🌍 REGIONS
     getRegions: builder.query({
       query: () => ({
         url: `/api/v1/locations/regions`,
         method: "GET",
       }),
     }),
+
+    // 🧑‍💼 LAVOZIM
     getLavozim: builder.query({
       query: () => ({
         url: `/api/v1/cv-lavozimlar/?skip=0&limit=100`,
         method: "GET",
       }),
     }),
-     getFilialls: builder.query({
+
+    // 🏢 FILIALLAR
+    getFilialls: builder.query({
       query: () => ({
         url: `/api/v1/filiallar/?skip=0&limit=100`,
         method: "GET",
       }),
     }),
+
+    // 🧠 SKILLS
     getSkills: builder.query({
-      query: (streetId) => ({
-        // url: `/api/v1/locations/regions/${streetId}`,
+      query: () => ({
         url: `/api/v1/skills-ref/?skip=0&limit=100`,
         method: "GET",
-        
       }),
     }),
-    
+
+    // 📍 DISTRICTS
     getStreet: builder.query({
-      query: (streetId) => ({
-        // url: `/api/v1/locations/regions/${streetId}`,
-        url: `/api/v1/locations/regions/${streetId}/districts`,
+      query: (regionId) => ({
+        url: `/api/v1/locations/regions/${regionId}/districts`,
         method: "GET",
-        
       }),
     }),
-    
   }),
 });
 
-export const { usePostUsersMutation,useGetRegionsQuery,useGetStreetQuery,useGetLavozimQuery,useGetFiliallsQuery,useGetSkillsQuery} = userApi;
+// hooks
+export const {
+  usePostUsersMutation,
+  useGetRegionsQuery,
+  useGetStreetQuery,
+  useGetLavozimQuery,
+  useGetFiliallsQuery,
+  useGetSkillsQuery,
+} = userApi;
