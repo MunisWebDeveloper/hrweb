@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import LabelComp from "./helper/LabelComp"
 import SelectComp from "./helper/SelectComp"
 import UploadBox from "./helper/UploadComp"
@@ -9,10 +9,12 @@ import EducationInfo from "./EducationInfo"
 import PersonalInfo from "./PersonalInfo"
 import PersonalAddInfo from "./PersonalAddInfo"
 import CheckboxExample from "./helper/CheckboxForm"
-import { usePostUsersMutation, useGetRegionsQuery, useGetStreetQuery, useGetLavozimQuery, useGetFiliallsQuery, useGetSkillsQuery } from './api/UsersApi'
-import AddModal from "./helper/AddModal"
+import { usePostUsersMutation, useGetRegionsQuery, 
+          useGetStreetQuery, useGetLavozimQuery, 
+          useGetFiliallsQuery, useGetSkillsQuery } from './api/UsersApi'
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next"
+import AddModal from "./helper/AddModal"
 
 const User = ({ getLang }) => {
   const [fio, setFio] = useState("")
@@ -28,7 +30,11 @@ const User = ({ getLang }) => {
   const [shahar, setShahar] = useState("")
   const [mfy, setMfy] = useState("")
   const [xoxlaydiganFilial, setXoxlaydiganFilial] = useState("")
+  // ✅ YANGI: tanlangan filialning lang_uz nomini saqlash uchun
+  const [xoxlaydiganFilialName, setXoxlaydiganFilialName] = useState("")
   const [xoxlaydiganLavozim, setXoxlaydiganLavozim] = useState("")
+  // ✅ YANGI: tanlangan lavozimning nomini saqlash uchun
+  const [xoxlaydiganLavozimName, setXoxlaydiganLavozimName] = useState("")
   const [avvalIshlaganmi, setAvvalIshlaganmi] = useState("")
   const [fuqarolik, setFuqarolik] = useState("")
   const [ishJoyiBormi, setishJoyiBormi] = useState("")
@@ -44,6 +50,7 @@ const User = ({ getLang }) => {
   const [qoshimchaRaqam, setQoshimchaRaqam] = useState("")
   const [xizmatSafari, setXizmatSafari] = useState("")
   const [disabl, setDisabl] = useState(false)
+  const [isModal, setIsModal] = useState(false)
   const [selectedImage, setSelectedImage] = useState(null)
   const [frontImage, setFrontImage] = useState(null)
   const [backImage, setBackImage] = useState(null)
@@ -60,9 +67,55 @@ const User = ({ getLang }) => {
   const { data: street = [], isLoading: streetLoading } = useGetStreetQuery(regionsmain, {
     skip: !regionsmain
   })
-  const { lang, id } = useParams();
+  const { lang, id, brand } = useParams();
   const [Users] = usePostUsersMutation()
 
+  // ✅ TUZATILDI: deduplicate olib tashlandi — har bir filialning o'z unique ID si bor
+  // Bir xil nomli filiallar bo'lsa ham, har biri alohida ID bilan saqlanishi kerak
+  const filteredFilials = useMemo(() => {
+    if (!filials || filials.length === 0) return []
+    return filials
+      .filter(filial => filial.brand === brand)
+      .sort((a, b) => a.lang_uz.localeCompare(b.lang_uz))
+  }, [filials, brand])
+
+  // ✅ TUZATILDI: deduplicate olib tashlandi
+  const filteredLavozim = useMemo(() => {
+    if (!lavozim || lavozim.length === 0) return []
+    return lavozim
+      .filter(item => item.brand === brand)
+      .sort((a, b) => a.title_uz.localeCompare(b.title_uz))
+  }, [lavozim, brand])
+
+  // Filial options
+  const xoxlaydiganFilialOptions = useMemo(() => {
+    return filteredFilials.map(item => ({
+      value: String(item.id),
+      label: item.lang_uz
+    }))
+  }, [filteredFilials])
+
+  // Lavozim options
+  const xoxlaydiganLavozimOptions = useMemo(() => {
+    return filteredLavozim.map(item => ({
+      value: String(item.id),
+      label: item.title_uz
+    }))
+  }, [filteredLavozim])
+
+  // ✅ YANGI: Filial tanlaganda ID ham, nom (lang_uz) ham saqlanadi
+  const handleFilialChange = (selectedValue) => {
+    setXoxlaydiganFilial(selectedValue)
+    const selected = filteredFilials.find(f => String(f.id) === String(selectedValue))
+    setXoxlaydiganFilialName(selected?.lang_uz || "")
+  }
+
+  // ✅ YANGI: Lavozim tanlaganda ID ham, nom ham saqlanadi
+  const handleLavozimChange = (selectedValue) => {
+    setXoxlaydiganLavozim(selectedValue)
+    const selected = filteredLavozim.find(l => String(l.id) === String(selectedValue))
+    setXoxlaydiganLavozimName(selected?.title_uz || "")
+  }
   useEffect(() => {
     if (street?.length > 0) {
       setStreetmain(street)
@@ -71,7 +124,7 @@ const User = ({ getLang }) => {
 
   useEffect(() => {
     getLang(lang)
-  }, [])
+  }, [lang, getLang])
 
   useEffect(() => {
     setShahar("")
@@ -88,6 +141,7 @@ const User = ({ getLang }) => {
     setShahar(selectedValue)
   }
 
+  // Options
   const jinsOptions = [
     { value: "erkak", label: "Erkak" },
     { value: "ayol", label: "Ayol" },
@@ -128,10 +182,10 @@ const User = ({ getLang }) => {
   ]
 
   const tilBilishDarajasiOptions = [
-    { value: "ozb", label: "O'zbek tili" },
-    { value: "Toj", label: "Tojik tili" },
-    { value: "Ing", label: "Ingliz tili" },
-    { value: "rus", label: "Rus tili" },
+    { value: "Uzbek", label: "O'zbek tili" },
+    { value: "Tojik", label: "Tojik tili" },
+    { value: "Inggliz", label: "Ingliz tili" },
+    { value: "Rus", label: "Rus tili" },
     { value: "Boshqa", label: "Boshqa" },
   ]
 
@@ -153,16 +207,6 @@ const User = ({ getLang }) => {
     label: item.name_uz || item.name
   }))
 
-  const xoxlaydiganFilialOptions = filials?.map(item => ({
-    value: String(item.id),
-    label: item.lang_uz
-  })) || []
-
-  const xoxlaydiganLavozimOptions = lavozim?.map(item => ({
-    value: String(item.id),
-    label: item.title_uz
-  })) || []
-
   const avvalIshlaganmiOptions = [
     { value: "Xa", label: "Xa" },
     { value: "Yo'q", label: "Yo'q" },
@@ -178,7 +222,9 @@ const User = ({ getLang }) => {
     { value: "Yo'q", label: "Yo'q" },
   ]
 
-  const dasturlarniBilishDarajasiOptions = skills.map(item => ({
+ const dasturlarniBilishDarajasiOptions = skills
+  .filter(item => item.is_active === true)
+  .map(item => ({
     value: item.id,
     label: item.name
   }))
@@ -363,13 +409,15 @@ const User = ({ getLang }) => {
     if (!shahar) { alert("Shaharni tanlang!"); return false }
     if (!xoxlaydiganFilial) { alert("Filialni tanlang!"); return false }
     if (!xoxlaydiganLavozim) { alert("Lavozimni tanlang!"); return false }
+    if (!backImage) { alert("Lavozimni tanlang!"); return false }
+    if (!frontImage) { alert("Lavozimni tanlang!"); return false }
+    if (!selectedImage) { alert("Lavozimni tanlang!"); return false }
     return true
   }
 
   const addUser = async () => {
     if (!validate()) return
     try {
-      // ✅ tg_id ni to'g'ri integer qilib olish
       const telegram = window?.Telegram?.WebApp
       const tgUserId = telegram?.initDataUnsafe?.user?.id || id
       const tgId = parseInt(tgUserId)
@@ -381,10 +429,11 @@ const User = ({ getLang }) => {
 
       const obj_in = {
         is_active: true,
-        tg_id: tgId,                              // ✅ integer
+        tg_id: tgId,
         fullName: fio,
         birthdate: toDate(tsana),
         gender: jins,
+        brand: brand,
         is_married: oilaviyHolat,
         degree: malumoti,
         is_study: oqiyotganMalumoti.length > 0,
@@ -392,7 +441,11 @@ const User = ({ getLang }) => {
         city_select: Number(shahar) || 0,
         street: mfy || null,
         branch_select_id: Number(xoxlaydiganFilial) || 0,
+        // ✅ TUZATILDI: branch_name — tanlangan filialning lang_uz nomi
+        branch_name: xoxlaydiganFilialName || "",
         lavozim_id: Number(xoxlaydiganLavozim) || 0,
+        // ✅ TUZATILDI: lavozim_name — tanlangan lavozimning nomi
+        lavozim_name: xoxlaydiganLavozimName || "",
         is_worker: avvalIshlaganmi === "Xa",
         is_citicenzs: fuqarolik === "Xa",
         current_work: ishJoyiBormi || null,
@@ -431,6 +484,11 @@ const User = ({ getLang }) => {
         })),
       }
 
+      // ✅ DEBUG: yuborilayotgan ma'lumotni konsolga chiqarish
+      console.log("📤 Yuborilyotgan obj_in:", JSON.stringify(obj_in, null, 2))
+      console.log("🏢 branch_select_id:", obj_in.branch_select_id)
+      console.log("🏢 branch_name:", obj_in.branch_name)
+
       const formData = new FormData()
       if (selectedImage) formData.append("private_picture", selectedImage)
       if (frontImage) formData.append("passport_picture", frontImage)
@@ -440,7 +498,6 @@ const User = ({ getLang }) => {
       const result = await Users(formData).unwrap()
       console.log("✅ Muvaffaqiyatli:", result)
 
-      // ✅ Muvaffaqiyatli bo'lganda Telegram popup va mini app yopish
       if (telegram) {
         telegram.showPopup(
           {
@@ -449,7 +506,7 @@ const User = ({ getLang }) => {
             buttons: [{ type: "ok" }],
           },
           () => {
-            telegram.close() // OK bosilgandan keyin mini app yopiladi
+            telegram.close()
           }
         )
       } else {
@@ -458,17 +515,12 @@ const User = ({ getLang }) => {
 
     } catch (err) {
       console.error("❌ To'liq xato:", JSON.stringify(err, null, 2))
-      console.error("Status:", err?.status)
-      console.error("Data:", err?.data)
-      console.error("Error:", err?.error)
-
       const msg = err?.data?.detail
         || err?.data?.message
         || err?.error
         || JSON.stringify(err?.data)
         || "Server bilan bog'lanib bo'lmadi"
 
-      // ✅ Xato bo'lganda ham Telegram popup ishlatish
       const telegram = window?.Telegram?.WebApp
       if (telegram) {
         telegram.showPopup({
@@ -481,6 +533,10 @@ const User = ({ getLang }) => {
       }
     }
   }
+    const handleModal= (e)=>{
+      e.preventDefault()
+      setIsModal(true)
+    }
 
   return (
     <div className="container mx-auto h-[100%] p-5 bg-black">
@@ -490,8 +546,9 @@ const User = ({ getLang }) => {
 
       {regionsLoading && <div className="text-white text-center py-4">Viloyatlar yuklanmoqda...</div>}
       {lavozimLoading && <div className="text-white text-center py-2">Lavozimlar yuklanmoqda...</div>}
+      {filialsLoading && <div className="text-white text-center py-2">Filiallar yuklanmoqda...</div>}
       {streetLoading && <div className="text-white text-center py-2">Shaharlar yuklanmoqda...</div>}
-
+    <AddModal isOpen={isModal} onClose={() => setIsModal(false)} setDisabl={setDisabl}/>
       <UserInfo
         fio={fio} setFio={setFio}
         tsana={tsana} setTsana={setTsana}
@@ -533,9 +590,13 @@ const User = ({ getLang }) => {
         shaharOptions={shaharOptions} shahar={shahar} setShahar={handleShaharChange}
         mfy={mfy} setMfy={setMfy}
         xoxlaydiganFilialOptions={xoxlaydiganFilialOptions}
-        xoxlaydiganFilial={xoxlaydiganFilial} setXoxlaydiganFilial={setXoxlaydiganFilial}
+        xoxlaydiganFilial={xoxlaydiganFilial}
+        // ✅ TUZATILDI: endi handleFilialChange ishlatiladi (ID + nom birga saqlanadi)
+        setXoxlaydiganFilial={handleFilialChange}
         xoxlaydiganLavozimOptions={xoxlaydiganLavozimOptions}
-        xoxlaydiganLavozim={xoxlaydiganLavozim} setXoxlaydiganLavozim={setXoxlaydiganLavozim}
+        xoxlaydiganLavozim={xoxlaydiganLavozim}
+        // ✅ TUZATILDI: endi handleLavozimChange ishlatiladi (ID + nom birga saqlanadi)
+        setXoxlaydiganLavozim={handleLavozimChange}
         avvalIshlaganmiOptions={avvalIshlaganmiOptions}
         avvalIshlaganmi={avvalIshlaganmi} setAvvalIshlaganmi={setAvvalIshlaganmi}
         fuqarolikOptions={fuqarolikOptions} fuqarolik={fuqarolik} setFuqarolik={setFuqarolik}
@@ -587,7 +648,7 @@ const User = ({ getLang }) => {
         <CheckboxExample checked={disabl} onChange={(e) => setDisabl(e.target.checked)} />
         <p>
           {t("rozilik")} *{" "}
-          <a href="#" className="text-red-500">({t('shartrozilik')})</a>
+          <a onClick={handleModal} href="#" className="text-red-500">({t('shartrozilik')})</a>
         </p>
       </div>
 

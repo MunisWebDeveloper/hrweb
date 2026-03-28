@@ -22,7 +22,7 @@ function App() {
     const telegram = window?.Telegram?.WebApp
     // i18n.changeLanguage('ru')
     if (!telegram) {
-      console.log("❌ Telegram WebApp emas")
+      // console.log("❌ Telegram WebApp emas")
       return
     }
 
@@ -31,10 +31,10 @@ function App() {
     const tgUser = telegram.initDataUnsafe?.user
 
     if (tgUser) {
-      console.log("✅ Telegram user:", tgUser)
+      // console.log("✅ Telegram user:", tgUser)
       setUser(tgUser)
     } else {
-      console.log("❌ User topilmadi")
+      // console.log("❌ User topilmadi")
     }
   }, [])
 
@@ -46,7 +46,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/:lang/:id" element={<User getLang={getLang} user={user} />} />
+        <Route path="/:lang/:id/:brand" element={<User getLang={getLang} user={user} />} />
         <Route path="/" element={<User getLang={getLang} user={user} />} />
       </Routes>
     </BrowserRouter>

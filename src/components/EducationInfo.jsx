@@ -13,7 +13,7 @@ const EducationInfo = ({
   const {t} = useTranslation()
   return (
     <>
-<LabelComp text={t("malumot")} />
+<LabelComp text={t("oqishMalumot")} />
 <SelectComp className="mb-3"
   options={malumotiOptions}
   value={malumoti}

@@ -13,6 +13,7 @@ const PersonalInfo = ({
     handledasturlarniBilishDarajasiMalumotiDelete,dasturlarniBilishDarajasiOptions,dasturlarniBilishDarajasiFoyizOptions
 }) => {
   const {t} = useTranslation()
+  
   return (
     <>
   <LabelComp text={t("vilinfo")} />

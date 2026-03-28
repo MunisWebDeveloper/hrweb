@@ -29,7 +29,7 @@ function TableComp5({
           <tr>
             <th className="px-3 py-2 text-left text-xs text-gray-600">Savol</th>
             <th className="px-3 py-2 text-left text-xs text-gray-600">Javob</th>
-            <th className="px-3 py-2 text-left text-xs text-gray-600">Izox</th>
+            {/* <th className="px-3 py-2 text-left text-xs text-gray-600">Izox</th> */}
           </tr>
         </thead>
         
@@ -42,22 +42,24 @@ function TableComp5({
                   </div>
                 </td>
 
-                <td className="px-3 py-2 whitespace-nowrap">
+                <td className="flex flex-col gap-3 px-3 py-2 whitespace-nowrap">
                   <SelectComp 
                     options={safeAnswerOptions} 
                     value={item.answer || ""} 
                     onChange={(val) => onAnswerChange?.(item.id, val)}
                     placeholder="Javobni tanlang"
-                  />                
-                </td>
-
-                <td className="px-3 py-2 whitespace-nowrap">
-                  <InputComp 
+                    
+                  />
+                   <InputComp 
                     value={item.comment || ""} 
                     setChange={(text) => onCommentChange?.(item.id, text)}
                     placeholder="Izoh yozing..."
-                  />
+                  />                
                 </td>
+
+                {/* <td className="px-3 py-2 whitespace-nowrap">
+                 
+                </td> */}
               </tr>
             ))}
         </tbody>
